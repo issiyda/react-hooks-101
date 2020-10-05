@@ -37,7 +37,6 @@ const App = props => {
                     </tr>
                 </thead>
             </table>
-
         </div>
     );
 }

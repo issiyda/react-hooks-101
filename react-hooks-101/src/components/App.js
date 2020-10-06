@@ -23,6 +23,15 @@ const App = props => {
         setBody('');
     }
 
+    const deleteAllEvents = e => {
+        e.preventDefault();
+        const result = window.confirm('全てのイベントを本当に削除してもよろしいですか？')
+        if(result) dispatch({ type: 'DELETE_ALL_EVENTS'});
+    }
+
+    const unCreatable = title === '' || body === '';
+
+
     return (
         <div className="container-fluid">
             <h4>イベント作成フォーム</h4>
@@ -39,8 +48,8 @@ const App = props => {
                               onChange={e => setBody(e.target.value)}/>
                 </div>
 
-                <button className="btn btn-primary" onClick={addEvent}>イベント作成</button>
-                <button className="btn btn-danger">全てのイベントを削除する</button>
+                <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>イベント作成</button>
+                <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>全てのイベントを削除する</button>
                 <button className="btn btn-danger">全ての操作ログをを削除する</button>
             </form>
 
@@ -55,7 +64,7 @@ const App = props => {
                 </tr>
                 </thead>
                 <tbody>
-                {state.map((event, index) => (<Event key={index} event={event} />))}
+                {state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch} />))}
                 </tbody>
             </table>
         </div>

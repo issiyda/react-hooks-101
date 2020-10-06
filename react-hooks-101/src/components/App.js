@@ -2,6 +2,8 @@ import React, {useState, useReducer} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import Event from './Event';
+
 import reducer from '../reducers'
 
 const App = props => {
@@ -10,19 +12,16 @@ const App = props => {
     const [body, setBody] = useState('')
 
     const addEvent = (e) => {
-        e.preventDefault()
-        console.log(title,body);
+        e.preventDefault();
+
         dispatch({
             type: 'CREATE_EVENT',
             title,
             body
-        })
-
+        });
         setTitle('');
         setBody('');
-
     }
-
 
     return (
         <div className="container-fluid">
@@ -30,12 +29,14 @@ const App = props => {
             <form>
                 <div className="form-group">
                     <label htmlFor="formEventTitle">タイトル</label>
-                    <input id="formEventTitle" className="form-control" type="text" value={title} onChange={e => setTitle(e.target.value)}/>
+                    <input id="formEventTitle" className="form-control" type="text" value={title}
+                           onChange={e => setTitle(e.target.value)}/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="formEventBody">ボディー</label>
-                    <textarea className="form-control" name="" id="formEventBody" cols="30" rows="10" value={body} onChange={e => setBody(e.target.value)}></textarea>
+                    <textarea className="form-control" name="" id="formEventBody" cols="30" rows="10" value={body}
+                              onChange={e => setBody(e.target.value)}/>
                 </div>
 
                 <button className="btn btn-primary" onClick={addEvent}>イベント作成</button>
@@ -53,6 +54,9 @@ const App = props => {
                     <th></th>
                 </tr>
                 </thead>
+                <tbody>
+                {state.map((event, index) => (<Event key={index} event={event} />))}
+                </tbody>
             </table>
         </div>
     );

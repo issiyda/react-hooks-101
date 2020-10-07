@@ -4,7 +4,7 @@ import reducer from "../reducers";
 import { CREATE_EVENT,
     DELETE_ALL_EVENTS,
     ADD_OPERATION_LOG,
-    DELETE_OPERATION_LOGS,
+    DELETE_ALL_OPERATION_LOGS,
 } from "../actions";
 
 import AppContext from "../contexts/AppContext";
@@ -37,7 +37,7 @@ const EventForm = () => {
 
     const deleteAllEvents = e => {
         e.preventDefault();
-        const result = window.confirm('全てのイベントを本当に削除してもよろしいですか？')
+        const result = window.confirm('全てのイベントを本当に削除してもよろしいですか？');
         if (result) {
             dispatch({type: DELETE_ALL_EVENTS});
             dispatch({
@@ -45,6 +45,14 @@ const EventForm = () => {
                 description: '全てのログを削除しました。',
                 operatedAt: timeCurrentIso8601()
             })
+        }
+    }
+
+    const deleteAllOpetrationLogs = e => {
+        e.preventDefault();
+        const result = window.confirm('全ての操作ログを本当に削除してもよろしいですか？');
+        if(result){
+            dispatch({type: DELETE_ALL_OPERATION_LOGS});
         }
     }
 
@@ -74,7 +82,7 @@ const EventForm = () => {
                 <button className="btn btn-danger" onClick={deleteAllEvents}
                         disabled={state.events.length === 0}>全てのイベントを削除する
                 </button>
-                <button className="btn btn-danger"> 全ての操作ログをを削除する</button>
+                <button className="btn btn-danger" onClick={deleteAllOpetrationLogs} disabled={state.operationLogs.length === 0}> 全ての操作ログをを削除する</button>
             </form>
         </>
 )}

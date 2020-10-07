@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 
-const Event = ({dispatch, event}) => {
+import AppContext from "../contexts/AppContext";
+
+const Event = ({event}) => {
+    const { dispatch } = useContext(AppContext);
     const id = event.id;
     const deleteEvent = () => {
         const result = window.confirm(`ID${id}のイベントを本当に削除してもよろしいですか？`)

@@ -53,7 +53,7 @@ const EventForm = () => {
                     disabled={unCreatable}> イベント作成
                 </button>
                 <button className="btn btn-danger" onClick={deleteAllEvents}
-                        disabled={state.length === 0}>全てのイベントを削除する
+                        disabled={state.events.length === 0}>全てのイベントを削除する
                 </button>
                 <button className="btn btn-danger"> 全ての操作ログをを削除する</button>
             </form>
